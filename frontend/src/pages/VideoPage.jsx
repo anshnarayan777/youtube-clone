@@ -1,8 +1,21 @@
 import { useState } from "react";
 
 const VideoPage = () => {
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  const addComment = () => {
+    if (comment.trim() === "") return;
+
+    setComments([
+      ...comments,
+      {
+        text: comment,
+      },
+    ]);
+
+    setComment("");
+  };
 
   return (
     <div className="text-white p-4">
@@ -12,24 +25,52 @@ const VideoPage = () => {
       </div>
 
       <h1 className="text-2xl font-bold mt-4">
-        Building a YouTube Clone with React
+        Building a YouTube Clone
       </h1>
 
-      <div className="flex gap-4 mt-4">
+      <div className="mt-8">
 
-        <button
-          onClick={() => setLikes(likes + 1)}
-          className="bg-zinc-800 px-4 py-2 rounded"
-        >
-          👍 {likes}
-        </button>
+        <h2 className="text-xl font-bold mb-4">
+          Comments
+        </h2>
 
-        <button
-          onClick={() => setDislikes(dislikes + 1)}
-          className="bg-zinc-800 px-4 py-2 rounded"
-        >
-          👎 {dislikes}
-        </button>
+        <div className="flex gap-3">
+
+          <input
+            type="text"
+            placeholder="Add a comment..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            className="flex-1 bg-zinc-900 p-3 rounded outline-none"
+          />
+
+          <button
+            onClick={addComment}
+            className="bg-red-500 px-4 rounded"
+          >
+            Post
+          </button>
+
+        </div>
+
+        <div className="mt-6 space-y-3">
+
+          {comments.map((item, index) => (
+            <div
+              key={index}
+              className="bg-zinc-900 p-3 rounded"
+            >
+              <p className="font-bold">
+                Mrityunjay
+              </p>
+
+              <p>
+                {item.text}
+              </p>
+            </div>
+          ))}
+
+        </div>
 
       </div>
 
