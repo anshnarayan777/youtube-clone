@@ -7,6 +7,13 @@ const VideoPage = () => {
   const addComment = () => {
     if (comment.trim() === "") return;
 
+    const regex = /^[a-zA-Z0-9\s]+$/;
+
+    if (!regex.test(comment)) {
+      alert("Special characters are not allowed!");
+      return;
+    }
+
     setComments([
       ...comments,
       {
