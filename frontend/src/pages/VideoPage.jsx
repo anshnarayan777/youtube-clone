@@ -32,7 +32,15 @@ const VideoPage = () => {
 
     updatedComments[index].dislikes += 1;
 
-    setComments(updatedComments);
+    if (updatedComments[index].dislikes >= 2) {
+      const filteredComments = updatedComments.filter(
+        (_, i) => i !== index
+      );
+
+      setComments(filteredComments);
+    } else {
+      setComments(updatedComments);
+    }
   };
 
   const deleteComment = (index) => {
@@ -111,6 +119,10 @@ const VideoPage = () => {
                   🗑 Delete
                 </button>
               </div>
+
+              <p className="text-xs text-gray-400 mt-2">
+                Comment will be auto-deleted after 2 dislikes
+              </p>
             </div>
           ))}
         </div>
