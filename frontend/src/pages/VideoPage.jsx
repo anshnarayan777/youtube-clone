@@ -11,15 +11,40 @@ const VideoPage = () => {
       ...comments,
       {
         text: comment,
+        likes: 0,
+        dislikes: 0,
       },
     ]);
 
     setComment("");
   };
 
+  const handleLike = (index) => {
+    const updatedComments = [...comments];
+
+    updatedComments[index].likes += 1;
+
+    setComments(updatedComments);
+  };
+
+  const handleDislike = (index) => {
+    const updatedComments = [...comments];
+
+    updatedComments[index].dislikes += 1;
+
+    setComments(updatedComments);
+  };
+
+  const deleteComment = (index) => {
+    const updatedComments = comments.filter(
+      (_, i) => i !== index
+    );
+
+    setComments(updatedComments);
+  };
+
   return (
     <div className="text-white p-4">
-
       <div className="w-full h-[500px] bg-zinc-800 rounded-lg flex items-center justify-center">
         <h1 className="text-3xl">Video Player Area</h1>
       </div>
@@ -29,13 +54,11 @@ const VideoPage = () => {
       </h1>
 
       <div className="mt-8">
-
         <h2 className="text-xl font-bold mb-4">
           Comments
         </h2>
 
         <div className="flex gap-3">
-
           <input
             type="text"
             placeholder="Add a comment..."
@@ -50,30 +73,48 @@ const VideoPage = () => {
           >
             Post
           </button>
-
         </div>
 
-        <div className="mt-6 space-y-3">
-
+        <div className="mt-6 space-y-4">
           {comments.map((item, index) => (
             <div
               key={index}
-              className="bg-zinc-900 p-3 rounded"
+              className="bg-zinc-900 p-4 rounded"
             >
               <p className="font-bold">
                 Mrityunjay
               </p>
 
-              <p>
+              <p className="mt-2">
                 {item.text}
               </p>
+
+              <div className="flex gap-3 mt-3">
+                <button
+                  onClick={() => handleLike(index)}
+                  className="bg-zinc-800 px-3 py-1 rounded"
+                >
+                  👍 {item.likes}
+                </button>
+
+                <button
+                  onClick={() => handleDislike(index)}
+                  className="bg-zinc-800 px-3 py-1 rounded"
+                >
+                  👎 {item.dislikes}
+                </button>
+
+                <button
+                  onClick={() => deleteComment(index)}
+                  className="bg-red-600 px-3 py-1 rounded"
+                >
+                  🗑 Delete
+                </button>
+              </div>
             </div>
           ))}
-
         </div>
-
       </div>
-
     </div>
   );
 };
