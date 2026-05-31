@@ -18,6 +18,7 @@ const VideoPage = () => {
       ...comments,
       {
         text: comment,
+        city: "Lucknow",
         likes: 0,
         dislikes: 0,
       },
@@ -97,7 +98,7 @@ const VideoPage = () => {
               className="bg-zinc-900 p-4 rounded"
             >
               <p className="font-bold">
-                Mrityunjay
+                Mrityunjay • {item.city}
               </p>
 
               <p className="mt-2">
