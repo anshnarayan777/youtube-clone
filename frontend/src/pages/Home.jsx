@@ -1,39 +1,12 @@
 import VideoCard from "../components/VideoCard";
+import videos from "../data/videos";
 
 const Home = () => {
-
-  const videos = [
-    {
-      title: "React Tutorial",
-      channel: "CodeWithHarry",
-      views: "10K",
-      thumbnail: "https://picsum.photos/400/250?random=1"
-    },
-    {
-      title: "Node.js Crash Course",
-      channel: "Traversy Media",
-      views: "25K",
-      thumbnail: "https://picsum.photos/400/250?random=2"
-    },
-    {
-      title: "MongoDB Guide",
-      channel: "Programming Guru",
-      views: "7K",
-      thumbnail: "https://picsum.photos/400/250?random=3"
-    },
-    {
-      title: "Tailwind CSS",
-      channel: "Frontend Master",
-      views: "15K",
-      thumbnail: "https://picsum.photos/400/250?random=4"
-    }
-  ];
-
   return (
-    <div className="grid grid-cols-3 gap-6 p-6">
-      {videos.map((video, index) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {videos.map((video) => (
         <VideoCard
-          key={index}
+          key={video.id}
           title={video.title}
           channel={video.channel}
           views={video.views}
