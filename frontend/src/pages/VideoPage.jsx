@@ -1,8 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import videos from "../data/videos";
 
 const VideoPage = () => {
+  const { id } = useParams();
+
+  const video = videos.find(
+    (video) => video.id === Number(id)
+  );
+
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    if (!video) return;
+
+    const history =
+      JSON.parse(localStorage.getItem("history")) || [];
+
+    const alreadyExists = history.find(
+      (item) => item.id === video.id
+    );
+
+    if (!alreadyExists) {
+      history.push(video);
+
+      localStorage.setItem(
+        "history",
+        JSON.stringify(history)
+      );
+    }
+  }, [video]);
 
   const addComment = () => {
     if (comment.trim() === "") return;
@@ -59,15 +87,29 @@ const VideoPage = () => {
     setComments(updatedComments);
   };
 
+  if (!video) {
+    return (
+      <div className="text-white text-3xl">
+        Video not found
+      </div>
+    );
+  }
+
   return (
     <div className="text-white p-4">
       <div className="w-full h-[500px] bg-zinc-800 rounded-lg flex items-center justify-center">
-        <h1 className="text-3xl">Video Player Area</h1>
+        <h1 className="text-3xl">
+          {video.title}
+        </h1>
       </div>
 
       <h1 className="text-2xl font-bold mt-4">
-        Building a YouTube Clone
+        {video.title}
       </h1>
+
+      <p className="text-gray-400 mt-2">
+        {video.channel} • {video.views} views
+      </p>
 
       <div className="mt-8">
         <h2 className="text-xl font-bold mb-4">

@@ -20,9 +20,9 @@ function App() {
         <div className="flex-1 p-4">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/video/:id" element={<VideoPage />} />
             <Route path="/history" element={<History />} />
             <Route path="/watchlater" element={<WatchLater />} />
-            <Route path="/video" element={<VideoPage />} />
             <Route path="/channel" element={<Channel />} />
           </Routes>
         </div>

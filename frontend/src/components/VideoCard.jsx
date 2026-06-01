@@ -33,7 +33,7 @@ const VideoCard = ({ id, title, channel, views, thumbnail }) => {
   return (
     <div className="bg-zinc-900 rounded-lg overflow-hidden shadow-lg">
 
-      <Link to="/video">
+      <Link to={`/video/${id}`}>
         <img
           src={thumbnail}
           alt={title}
