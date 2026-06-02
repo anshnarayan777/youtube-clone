@@ -13,6 +13,9 @@ const VideoPage = () => {
   const [comments, setComments] = useState([]);
   const [subscribed, setSubscribed] = useState(false);
 
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+
   useEffect(() => {
     if (!video) return;
 
@@ -137,6 +140,50 @@ const VideoPage = () => {
               ? "Subscribed"
               : "Subscribe"}
           </button>
+
+        </div>
+
+        <div className="flex gap-4 mt-4">
+
+          <button
+            onClick={() => setLikes(likes + 1)}
+            className="bg-zinc-800 px-4 py-2 rounded-full"
+          >
+            👍 {likes}
+          </button>
+
+          <button
+            onClick={() => setDislikes(dislikes + 1)}
+            className="bg-zinc-800 px-4 py-2 rounded-full"
+          >
+            👎 {dislikes}
+          </button>
+
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(
+                window.location.href
+              );
+              alert("Video link copied!");
+            }}
+            className="bg-zinc-800 px-4 py-2 rounded-full"
+          >
+            Share
+          </button>
+
+        </div>
+
+        <div className="bg-zinc-900 p-4 rounded-lg mt-4">
+
+          <p>
+            {video.views} views
+          </p>
+
+          <p className="mt-2">
+            This is a YouTube-inspired project built
+            using React, React Router, Tailwind CSS
+            and browser localStorage.
+          </p>
 
         </div>
 
