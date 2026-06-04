@@ -8,6 +8,10 @@ import History from "./pages/History";
 import WatchLater from "./pages/WatchLater";
 import VideoPage from "./pages/VideoPage";
 import Channel from "./pages/Channel";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -18,51 +22,76 @@ function App() {
   return (
     <div className="bg-black min-h-screen">
 
-      <Navbar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+      <Routes>
 
-      <div className="flex">
+        <Route
+          path="/login"
+          element={<Login />}
+        />
 
-        <Sidebar />
+        <Route
+          path="/signup"
+          element={<Signup />}
+        />
 
-        <div className="flex-1 p-4">
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
 
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  searchTerm={searchTerm}
-                />
-              }
-            />
+              <Navbar
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
 
-            <Route
-              path="/video/:id"
-              element={<VideoPage />}
-            />
+              <div className="flex">
 
-            <Route
-              path="/history"
-              element={<History />}
-            />
+                <Sidebar />
 
-            <Route
-              path="/watchlater"
-              element={<WatchLater />}
-            />
+                <div className="flex-1 p-4">
 
-            <Route
-              path="/channel"
-              element={<Channel />}
-            />
-          </Routes>
+                  <Routes>
 
-        </div>
+                    <Route
+                      path="/"
+                      element={
+                        <Home
+                          searchTerm={searchTerm}
+                        />
+                      }
+                    />
 
-      </div>
+                    <Route
+                      path="/video/:id"
+                      element={<VideoPage />}
+                    />
+
+                    <Route
+                      path="/history"
+                      element={<History />}
+                    />
+
+                    <Route
+                      path="/watchlater"
+                      element={<WatchLater />}
+                    />
+
+                    <Route
+                      path="/channel"
+                      element={<Channel />}
+                    />
+
+                  </Routes>
+
+                </div>
+
+              </div>
+
+            </ProtectedRoute>
+          }
+        />
+
+      </Routes>
 
     </div>
   );
