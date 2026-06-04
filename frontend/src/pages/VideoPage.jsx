@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import videos from "../data/videos";
 
 const VideoPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const video = videos.find(
     (video) => video.id === Number(id)
@@ -119,7 +120,10 @@ const VideoPage = () => {
         <div className="flex justify-between items-center mt-4">
 
           <div>
-            <h2 className="font-bold text-lg">
+            <h2
+              className="font-bold text-lg cursor-pointer hover:text-red-500"
+              onClick={() => navigate("/channel")}
+            >
               {video.channel}
             </h2>
 
@@ -168,7 +172,6 @@ const VideoPage = () => {
               navigator.clipboard.writeText(
                 window.location.href
               );
-
               alert("Video link copied!");
             }}
             className="bg-zinc-800 px-4 py-2 rounded-full"
