@@ -12,7 +12,6 @@ const VideoPage = () => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [subscribed, setSubscribed] = useState(false);
-
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
 
@@ -61,9 +60,7 @@ const VideoPage = () => {
 
   const handleLike = (index) => {
     const updatedComments = [...comments];
-
     updatedComments[index].likes += 1;
-
     setComments(updatedComments);
   };
 
@@ -102,10 +99,15 @@ const VideoPage = () => {
   return (
     <div className="text-white p-4">
 
-      <div className="w-full h-[500px] bg-zinc-800 rounded-lg flex items-center justify-center">
-        <h1 className="text-3xl">
-          {video.title}
-        </h1>
+      <div className="w-full">
+        <iframe
+          width="100%"
+          height="500"
+          src={video.videoUrl}
+          title={video.title}
+          allowFullScreen
+          className="rounded-lg"
+        ></iframe>
       </div>
 
       <div className="mt-4">
@@ -153,7 +155,9 @@ const VideoPage = () => {
           </button>
 
           <button
-            onClick={() => setDislikes(dislikes + 1)}
+            onClick={() =>
+              setDislikes(dislikes + 1)
+            }
             className="bg-zinc-800 px-4 py-2 rounded-full"
           >
             👎 {dislikes}
@@ -164,6 +168,7 @@ const VideoPage = () => {
               navigator.clipboard.writeText(
                 window.location.href
               );
+
               alert("Video link copied!");
             }}
             className="bg-zinc-800 px-4 py-2 rounded-full"
@@ -180,9 +185,10 @@ const VideoPage = () => {
           </p>
 
           <p className="mt-2">
-            This is a YouTube-inspired project built
-            using React, React Router, Tailwind CSS
-            and browser localStorage.
+            This is a YouTube-inspired application
+            built using React, React Router,
+            Tailwind CSS, localStorage and modern
+            frontend development practices.
           </p>
 
         </div>
