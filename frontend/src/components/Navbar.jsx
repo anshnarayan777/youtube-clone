@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
 
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
 
@@ -47,15 +51,15 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
 
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4">
 
-        <FaBell
-          className="cursor-pointer text-xl"
-        />
+        <FaBell className="cursor-pointer text-xl" />
 
-        <FaUserCircle
-          className="cursor-pointer text-3xl"
-        />
+        <p className="text-sm text-gray-300">
+          Welcome, {user?.name}
+        </p>
+
+        <FaUserCircle className="cursor-pointer text-3xl" />
 
         <button
           onClick={handleLogout}
