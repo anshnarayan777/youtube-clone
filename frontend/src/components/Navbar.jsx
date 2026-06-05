@@ -5,7 +5,19 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 
+import { useNavigate } from "react-router-dom";
+
 const Navbar = ({ searchTerm, setSearchTerm }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+
+    alert("Logged Out Successfully");
+
+    navigate("/login");
+  };
+
   return (
     <div className="bg-black text-white p-4 flex justify-between items-center border-b border-zinc-800">
 
@@ -35,9 +47,23 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
 
       </div>
 
-      <div className="flex items-center gap-6 text-xl">
-        <FaBell className="cursor-pointer" />
-        <FaUserCircle className="cursor-pointer text-3xl" />
+      <div className="flex items-center gap-6">
+
+        <FaBell
+          className="cursor-pointer text-xl"
+        />
+
+        <FaUserCircle
+          className="cursor-pointer text-3xl"
+        />
+
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
+        >
+          Logout
+        </button>
+
       </div>
 
     </div>
